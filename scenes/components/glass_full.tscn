@@ -1,0 +1,54 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/glass_full.png" type="Texture" id=1]
+[ext_resource path="res://scripts/glass.gd" type="Script" id=2]
+[ext_resource path="res://assets/glass_shatter_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/glass_shatter_7.png" type="Texture" id=4]
+[ext_resource path="res://assets/glass_shatter_3.png" type="Texture" id=5]
+[ext_resource path="res://assets/glass_shatter_4.png" type="Texture" id=6]
+[ext_resource path="res://assets/glass_shatter_5.png" type="Texture" id=7]
+[ext_resource path="res://assets/glass_shatter_1.png" type="Texture" id=8]
+[ext_resource path="res://assets/glass_shatter_6.png" type="Texture" id=9]
+[ext_resource path="res://scenes/components/glass_player.tscn" type="PackedScene" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 4 ) ],
+"loop": false,
+"name": "shatter",
+"speed": 12.0
+} ]
+
+[node name="glass_full" type="Area2D"]
+position = Vector2( 640, 64 )
+script = ExtResource( 2 )
+
+[node name="glass_full_sprite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 512, 0, 512 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="glass_full_anim" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "idle"
+playing = true
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="glass_player" parent="." instance=ExtResource( 10 )]

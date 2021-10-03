@@ -1,0 +1,225 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://scenes/components/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/components/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/static_switch.gd" type="Script" id=3]
+[ext_resource path="res://scenes/components/glass_full.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/components/glass_half.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/boss_closed.png" type="Texture" id=6]
+[ext_resource path="res://scripts/boss.gd" type="Script" id=7]
+[ext_resource path="res://scenes/components/boss_grabber.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/boss_hurt_3.png" type="Texture" id=9]
+[ext_resource path="res://scripts/boss_grabber_pos.gd" type="Script" id=10]
+[ext_resource path="res://assets/boss_open.png" type="Texture" id=11]
+[ext_resource path="res://assets/boss_hurt_1.png" type="Texture" id=12]
+[ext_resource path="res://assets/boss_hurt_2.png" type="Texture" id=13]
+[ext_resource path="res://assets/boss_hurt_4.png" type="Texture" id=14]
+[ext_resource path="res://scripts/progress_bar.gd" type="Script" id=15]
+[ext_resource path="res://scenes/components/background.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/music/monster.wav" type="AudioStream" id=17]
+[ext_resource path="res://scripts/level_one_audio.gd" type="Script" id=18]
+[ext_resource path="res://scenes/components/enemy_player.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/sfx/bosshurt.wav" type="AudioStream" id=20]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "open",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "closed",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 12.0
+} ]
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://assets/fonts/Andale Mono.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 51
+outline_color = Color( 0.678431, 0.184314, 0.184314, 1 )
+font_data = SubResource( 2 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 240.0
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.423529, 0.0784314, 0.0784314, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://assets/fonts/Andale Mono.ttf"
+
+[sub_resource type="DynamicFont" id=7]
+size = 28
+font_data = SubResource( 6 )
+
+[node name="base" type="Node2D"]
+
+[node name="glass_full" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1600, 64 )
+
+[node name="glass_full2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1664, 64 )
+
+[node name="glass_full3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1728, 64 )
+
+[node name="glass_full4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1792, 64 )
+
+[node name="glass_full5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1856, 64 )
+
+[node name="glass_full6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1920, 64 )
+
+[node name="glass_full7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1984, 64 )
+
+[node name="glass_full8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2048, 64 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0, 32, 0, 0, 33, 0, 0, 42, 0, 0, 43, 0, 0, 44, 0, 0, 45, 0, 0, 46, 0, 0, 47, 0, 0, 48, 0, 0, 49, 0, 0, 50, 0, 0, 51, 0, 0, 52, 0, 0, 53, 0, 0, 54, 0, 0, 55, 0, 0, 56, 0, 0, 57, 0, 0, 58, 0, 0, 59, 0, 0, 60, 0, 0, 61, 0, 0, 62, 0, 0, 63, 0, 0, 64, 0, 0, 65, 0, 0, 66, 0, 0, 67, 0, 0, 68, 0, 0, 69, 0, 0, 70, 0, 0, 65569, 0, 0, 65578, 0, 0, 65606, 0, 0, 131105, 0, 0, 131106, 0, 0, 131107, 0, 0, 131108, 0, 0, 131109, 0, 0, 131110, 0, 0, 131111, 0, 0, 131112, 0, 0, 131113, 0, 0, 131114, 0, 0, 131142, 0, 0, 196678, 0, 0, 262214, 0, 0, 327750, 0, 0, 393286, 0, 0, 458785, 0, 0, 458786, 0, 0, 458787, 0, 0, 458788, 0, 0, 458789, 0, 0, 458790, 0, 0, 458791, 0, 0, 458792, 0, 0, 458793, 0, 0, 458794, 0, 0, 458822, 0, 0, 524321, 0, 0, 524330, 0, 0, 524358, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0, 589841, 0, 0, 589842, 0, 0, 589843, 0, 0, 589844, 0, 0, 589845, 0, 0, 589846, 0, 0, 589847, 0, 0, 589848, 0, 0, 589849, 0, 0, 589850, 0, 0, 589851, 0, 0, 589852, 0, 0, 589853, 0, 0, 589854, 0, 0, 589855, 0, 0, 589856, 0, 0, 589857, 0, 0, 589866, 0, 0, 589894, 0, 0, 655402, 0, 0, 655430, 0, 0, 720938, 0, 0, 720966, 0, 0, 786474, 0, 0, 786502, 0, 0, 852010, 0, 0, 852038, 0, 0, 917546, 0, 0, 917574, 0, 0, 983082, 0, 0, 983110, 0, 0, 1048618, 0, 0, 1048646, 0, 0, 1114154, 0, 0, 1114182, 0, 0, 1179690, 0, 0, 1179718, 0, 0, 1245226, 0, 0, 1245227, 0, 0, 1245228, 0, 0, 1245229, 0, 0, 1245230, 0, 0, 1245231, 0, 0, 1245232, 0, 0, 1245233, 0, 0, 1245234, 0, 0, 1245235, 0, 0, 1245236, 0, 0, 1245237, 0, 0, 1245238, 0, 0, 1245239, 0, 0, 1245240, 0, 0, 1245241, 0, 0, 1245242, 0, 0, 1245243, 0, 0, 1245244, 0, 0, 1245245, 0, 0, 1245246, 0, 0, 1245247, 0, 0, 1245248, 0, 0, 1245249, 0, 0, 1245250, 0, 0, 1245251, 0, 0, 1245252, 0, 0, 1245253, 0, 0, 1245254, 0, 0 )
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+
+[node name="glass_half" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2176, 192 )
+
+[node name="glass_half2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2240, 192 )
+
+[node name="glass_half3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2304, 192 )
+
+[node name="glass_half4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2368, 192 )
+
+[node name="glass_half5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2432, 192 )
+
+[node name="glass_half6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2496, 192 )
+
+[node name="glass_half7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2560, 192 )
+
+[node name="glass_half8" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2624, 192 )
+
+[node name="static_switch" type="Area2D" parent="."]
+position = Vector2( 2910, 192 )
+script = ExtResource( 3 )
+
+[node name="static_coll" type="CollisionPolygon2D" parent="static_switch"]
+polygon = PoolVector2Array( 2, -128, 18, -128, 34, -128, 34, 1024, -6, 1024 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="boss" type="Area2D" parent="."]
+position = Vector2( 3368, 344 )
+script = ExtResource( 7 )
+
+[node name="boss_spr" type="Sprite" parent="boss"]
+visible = false
+texture = ExtResource( 6 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="boss_grabber_pos" type="Position2D" parent="boss"]
+position = Vector2( 272, 248 )
+script = ExtResource( 10 )
+
+[node name="boss_grabber" parent="boss/boss_grabber_pos" instance=ExtResource( 8 )]
+position = Vector2( 336, 344 )
+
+[node name="boss_grabber2" parent="boss/boss_grabber_pos" instance=ExtResource( 8 )]
+position = Vector2( -24, -456 )
+
+[node name="boss_grabber3" parent="boss/boss_grabber_pos" instance=ExtResource( 8 )]
+position = Vector2( -512, 8 )
+
+[node name="boss_grabber4" parent="boss/boss_grabber_pos" instance=ExtResource( 8 )]
+position = Vector2( 408, -136 )
+
+[node name="boss_grabber5" parent="boss/boss_grabber_pos" instance=ExtResource( 8 )]
+position = Vector2( -296, 360 )
+
+[node name="boss_grabber6" parent="boss/boss_grabber_pos" instance=ExtResource( 8 )]
+position = Vector2( -400, -376 )
+
+[node name="boss_anim_spr" type="AnimatedSprite" parent="boss"]
+frames = SubResource( 1 )
+animation = "closed"
+playing = true
+centered = false
+
+[node name="time_check" type="Label" parent="boss"]
+margin_left = 248.0
+margin_right = 288.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.94902, 0.12549, 0.12549, 1 )
+text = "5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boss_coll" type="CollisionShape2D" parent="boss"]
+position = Vector2( 256, 256 )
+shape = SubResource( 4 )
+
+[node name="boss_player" type="AudioStreamPlayer2D" parent="boss"]
+stream = ExtResource( 20 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+margin_left = 80.0
+margin_top = 592.0
+margin_right = 888.0
+margin_bottom = 624.0
+custom_styles/fg = SubResource( 5 )
+max_value = 1000.0
+value = 1000.0
+percent_visible = false
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_left = 88.0
+margin_top = 592.0
+margin_right = 304.0
+margin_bottom = 624.0
+custom_fonts/font = SubResource( 7 )
+text = "Pill Monkey Gareth"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" parent="." instance=ExtResource( 16 )]
+
+[node name="level_one_audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+script = ExtResource( 18 )
+
+[node name="enemy_player" parent="." instance=ExtResource( 19 )]

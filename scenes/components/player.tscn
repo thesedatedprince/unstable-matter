@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://assets/player_gas.png" type="Texture" id=2]
+[ext_resource path="res://assets/player_solid.png" type="Texture" id=3]
+[ext_resource path="res://assets/player_transition_2.png" type="Texture" id=4]
+[ext_resource path="res://assets/player_transition_1.png" type="Texture" id=5]
+[ext_resource path="res://assets/sfx/playerdead.wav" type="AudioStream" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 48, 22 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "solid",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "to_gas",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "to_solid",
+"speed": 24.0
+} ]
+
+[node name="player" type="KinematicBody2D"]
+position = Vector2( 0, 256 )
+script = ExtResource( 1 )
+
+[node name="player_coll" type="CollisionShape2D" parent="."]
+position = Vector2( 64, 30 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 480, 64 )
+current = true
+limit_top = 0
+limit_bottom = 640
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.0
+drag_margin_top = 0.63
+drag_margin_right = 0.26
+drag_margin_bottom = 0.84
+
+[node name="player_animations" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "to_gas"
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="player_dead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )

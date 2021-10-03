@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/vac.gd" type="Script" id=1]
+[ext_resource path="res://scripts/vac_area.gd" type="Script" id=2]
+[ext_resource path="res://assets/vac_enemy.png" type="Texture" id=3]
+[ext_resource path="res://assets/vac_enemy_3.png" type="Texture" id=4]
+[ext_resource path="res://assets/vac_enemy_2.png" type="Texture" id=5]
+[ext_resource path="res://scenes/components/enemy_player.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="vac" type="KinematicBody2D"]
+position = Vector2( 2384, 72 )
+script = ExtResource( 1 )
+
+[node name="vac_coll" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 8, 8, 56, 8, 48, 56, 16, 56 )
+one_way_collision = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="vac_area" type="Area2D" parent="."]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="vac_area_coll" type="CollisionPolygon2D" parent="vac_area"]
+polygon = PoolVector2Array( 128, -320, 128, 768, -392, 768, -384, -328 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="vac_anim_sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+playing = true
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="enemy_player" parent="." instance=ExtResource( 6 )]
